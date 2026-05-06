@@ -1,0 +1,933 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Radio Cult API
+  description: Power your online radio station website with the Radio Cult API. Manage artists, schedules, media, playlists,
+    recordings, and live streaming metadata.
+  tags:
+  - Radio
+  - Cult
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: radio-cult
+    baseUri: https://api.radiocult.fm
+    description: Radio Cult API HTTP API.
+    authentication:
+      type: apikey
+      in: header
+      name: x-api-key
+      value: '{{RADIO_CULT_TOKEN}}'
+    resources:
+    - name: api-station-stationid-artists
+      path: /api/station/{stationId}/artists
+      operations:
+      - name: get-api-station-stationid-artists
+        method: GET
+        description: Retrieve all artists
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post-api-station-stationid-artists
+        method: POST
+        description: Create an artist
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-station-stationid-artists-artistid
+      path: /api/station/{stationId}/artists/{artistId}
+      operations:
+      - name: get-api-station-stationid-artists-artistid
+        method: GET
+        description: Fetch artist by ID or slug
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        - name: artistId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-station-stationid-artists-artistid-schedule
+      path: /api/station/{stationId}/artists/{artistId}/schedule
+      operations:
+      - name: get-api-station-stationid-artists-artistid-sched
+        method: GET
+        description: Get an artist's scheduled events
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        - name: artistId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-station-stationid-schedule
+      path: /api/station/{stationId}/schedule
+      operations:
+      - name: get-api-station-stationid-schedule
+        method: GET
+        description: Get events in a date range
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-station-stationid-schedule-live
+      path: /api/station/{stationId}/schedule/live
+      operations:
+      - name: get-api-station-stationid-schedule-live
+        method: GET
+        description: Current live broadcast status and metadata
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-station-stationid-media-track
+      path: /api/station/{stationId}/media/track
+      operations:
+      - name: get-api-station-stationid-media-track
+        method: GET
+        description: Retrieve all media tracks
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post-api-station-stationid-media-track
+        method: POST
+        description: Upload an MP3 track
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-station-stationid-media-track-trackid-downlo
+      path: /api/station/{stationId}/media/track/{trackId}/download-url
+      operations:
+      - name: get-api-station-stationid-media-track-trackid-do
+        method: GET
+        description: Get a signed download URL for a track
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        - name: trackId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-station-stationid-media-track-trackid-tag-ta
+      path: /api/station/{stationId}/media/track/{trackId}/tag/{tagId}
+      operations:
+      - name: put-api-station-stationid-media-track-trackid-ta
+        method: PUT
+        description: Tag a media track
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        - name: trackId
+          in: path
+          type: string
+          required: true
+        - name: tagId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-station-stationid-media-track-trackid-upload
+      path: /api/station/{stationId}/media/track/{trackId}/upload/soundcloud
+      operations:
+      - name: post-api-station-stationid-media-track-trackid-u
+        method: POST
+        description: Upload a track to Soundcloud
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        - name: trackId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-station-stationid-media-playlist
+      path: /api/station/{stationId}/media/playlist
+      operations:
+      - name: get-api-station-stationid-media-playlist
+        method: GET
+        description: Retrieve all playlists
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-station-stationid-media-playlist-playlistid-
+      path: /api/station/{stationId}/media/playlist/{playlistId}/entry
+      operations:
+      - name: post-api-station-stationid-media-playlist-playli
+        method: POST
+        description: Add an entry to a playlist
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        - name: playlistId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-station-stationid-media-playlist-playlistid-
+      path: /api/station/{stationId}/media/playlist/{playlistId}/entries
+      operations:
+      - name: delete-api-station-stationid-media-playlist-play
+        method: DELETE
+        description: Clear all entries from a playlist
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        - name: playlistId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-station-stationid-media-tag
+      path: /api/station/{stationId}/media/tag
+      operations:
+      - name: get-api-station-stationid-media-tag
+        method: GET
+        description: Retrieve all tags
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-station-stationid-media-recording
+      path: /api/station/{stationId}/media/recording
+      operations:
+      - name: get-api-station-stationid-media-recording
+        method: GET
+        description: Retrieve recordings
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-station-stationid-media-recording-recordingi
+      path: /api/station/{stationId}/media/recording/{recordingId}/download-url
+      operations:
+      - name: get-api-station-stationid-media-recording-record
+        method: GET
+        description: Get a signed download URL for a recording
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        - name: recordingId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-station-stationid-streaming-history-latest-r
+      path: /api/station/{stationId}/streaming/history/latest-results
+      operations:
+      - name: get-api-station-stationid-streaming-history-late
+        method: GET
+        description: Recent track playback history
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: radio-cult-rest
+    description: REST adapter for Radio Cult API.
+    resources:
+    - path: /api/station/{stationId}/artists
+      name: get-api-station-stationid-artists
+      operations:
+      - method: GET
+        name: get-api-station-stationid-artists
+        description: Retrieve all artists
+        call: radio-cult.get-api-station-stationid-artists
+        with:
+          stationId: rest.stationId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/station/{stationId}/artists
+      name: post-api-station-stationid-artists
+      operations:
+      - method: POST
+        name: post-api-station-stationid-artists
+        description: Create an artist
+        call: radio-cult.post-api-station-stationid-artists
+        with:
+          stationId: rest.stationId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/station/{stationId}/artists/{artistId}
+      name: get-api-station-stationid-artists-artistid
+      operations:
+      - method: GET
+        name: get-api-station-stationid-artists-artistid
+        description: Fetch artist by ID or slug
+        call: radio-cult.get-api-station-stationid-artists-artistid
+        with:
+          stationId: rest.stationId
+          artistId: rest.artistId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/station/{stationId}/artists/{artistId}/schedule
+      name: get-api-station-stationid-artists-artistid-sched
+      operations:
+      - method: GET
+        name: get-api-station-stationid-artists-artistid-sched
+        description: Get an artist's scheduled events
+        call: radio-cult.get-api-station-stationid-artists-artistid-sched
+        with:
+          stationId: rest.stationId
+          artistId: rest.artistId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/station/{stationId}/schedule
+      name: get-api-station-stationid-schedule
+      operations:
+      - method: GET
+        name: get-api-station-stationid-schedule
+        description: Get events in a date range
+        call: radio-cult.get-api-station-stationid-schedule
+        with:
+          stationId: rest.stationId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/station/{stationId}/schedule/live
+      name: get-api-station-stationid-schedule-live
+      operations:
+      - method: GET
+        name: get-api-station-stationid-schedule-live
+        description: Current live broadcast status and metadata
+        call: radio-cult.get-api-station-stationid-schedule-live
+        with:
+          stationId: rest.stationId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/station/{stationId}/media/track
+      name: get-api-station-stationid-media-track
+      operations:
+      - method: GET
+        name: get-api-station-stationid-media-track
+        description: Retrieve all media tracks
+        call: radio-cult.get-api-station-stationid-media-track
+        with:
+          stationId: rest.stationId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/station/{stationId}/media/track
+      name: post-api-station-stationid-media-track
+      operations:
+      - method: POST
+        name: post-api-station-stationid-media-track
+        description: Upload an MP3 track
+        call: radio-cult.post-api-station-stationid-media-track
+        with:
+          stationId: rest.stationId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/station/{stationId}/media/track/{trackId}/download-url
+      name: get-api-station-stationid-media-track-trackid-do
+      operations:
+      - method: GET
+        name: get-api-station-stationid-media-track-trackid-do
+        description: Get a signed download URL for a track
+        call: radio-cult.get-api-station-stationid-media-track-trackid-do
+        with:
+          stationId: rest.stationId
+          trackId: rest.trackId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/station/{stationId}/media/track/{trackId}/tag/{tagId}
+      name: put-api-station-stationid-media-track-trackid-ta
+      operations:
+      - method: PUT
+        name: put-api-station-stationid-media-track-trackid-ta
+        description: Tag a media track
+        call: radio-cult.put-api-station-stationid-media-track-trackid-ta
+        with:
+          stationId: rest.stationId
+          trackId: rest.trackId
+          tagId: rest.tagId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/station/{stationId}/media/track/{trackId}/upload/soundcloud
+      name: post-api-station-stationid-media-track-trackid-u
+      operations:
+      - method: POST
+        name: post-api-station-stationid-media-track-trackid-u
+        description: Upload a track to Soundcloud
+        call: radio-cult.post-api-station-stationid-media-track-trackid-u
+        with:
+          stationId: rest.stationId
+          trackId: rest.trackId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/station/{stationId}/media/playlist
+      name: get-api-station-stationid-media-playlist
+      operations:
+      - method: GET
+        name: get-api-station-stationid-media-playlist
+        description: Retrieve all playlists
+        call: radio-cult.get-api-station-stationid-media-playlist
+        with:
+          stationId: rest.stationId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/station/{stationId}/media/playlist/{playlistId}/entry
+      name: post-api-station-stationid-media-playlist-playli
+      operations:
+      - method: POST
+        name: post-api-station-stationid-media-playlist-playli
+        description: Add an entry to a playlist
+        call: radio-cult.post-api-station-stationid-media-playlist-playli
+        with:
+          stationId: rest.stationId
+          playlistId: rest.playlistId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/station/{stationId}/media/playlist/{playlistId}/entries
+      name: delete-api-station-stationid-media-playlist-play
+      operations:
+      - method: DELETE
+        name: delete-api-station-stationid-media-playlist-play
+        description: Clear all entries from a playlist
+        call: radio-cult.delete-api-station-stationid-media-playlist-play
+        with:
+          stationId: rest.stationId
+          playlistId: rest.playlistId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/station/{stationId}/media/tag
+      name: get-api-station-stationid-media-tag
+      operations:
+      - method: GET
+        name: get-api-station-stationid-media-tag
+        description: Retrieve all tags
+        call: radio-cult.get-api-station-stationid-media-tag
+        with:
+          stationId: rest.stationId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/station/{stationId}/media/recording
+      name: get-api-station-stationid-media-recording
+      operations:
+      - method: GET
+        name: get-api-station-stationid-media-recording
+        description: Retrieve recordings
+        call: radio-cult.get-api-station-stationid-media-recording
+        with:
+          stationId: rest.stationId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/station/{stationId}/media/recording/{recordingId}/download-url
+      name: get-api-station-stationid-media-recording-record
+      operations:
+      - method: GET
+        name: get-api-station-stationid-media-recording-record
+        description: Get a signed download URL for a recording
+        call: radio-cult.get-api-station-stationid-media-recording-record
+        with:
+          stationId: rest.stationId
+          recordingId: rest.recordingId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/station/{stationId}/streaming/history/latest-results
+      name: get-api-station-stationid-streaming-history-late
+      operations:
+      - method: GET
+        name: get-api-station-stationid-streaming-history-late
+        description: Recent track playback history
+        call: radio-cult.get-api-station-stationid-streaming-history-late
+        with:
+          stationId: rest.stationId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: radio-cult-mcp
+    transport: http
+    description: MCP adapter for Radio Cult API for AI agent use.
+    tools:
+    - name: get-api-station-stationid-artists
+      description: Retrieve all artists
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult.get-api-station-stationid-artists
+      with:
+        stationId: tools.stationId
+      inputParameters:
+      - name: stationId
+        type: string
+        description: stationId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-api-station-stationid-artists
+      description: Create an artist
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: radio-cult.post-api-station-stationid-artists
+      with:
+        stationId: tools.stationId
+      inputParameters:
+      - name: stationId
+        type: string
+        description: stationId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-station-stationid-artists-artistid
+      description: Fetch artist by ID or slug
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult.get-api-station-stationid-artists-artistid
+      with:
+        stationId: tools.stationId
+        artistId: tools.artistId
+      inputParameters:
+      - name: stationId
+        type: string
+        description: stationId
+        required: true
+      - name: artistId
+        type: string
+        description: artistId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-station-stationid-artists-artistid-sched
+      description: Get an artist's scheduled events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult.get-api-station-stationid-artists-artistid-sched
+      with:
+        stationId: tools.stationId
+        artistId: tools.artistId
+      inputParameters:
+      - name: stationId
+        type: string
+        description: stationId
+        required: true
+      - name: artistId
+        type: string
+        description: artistId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-station-stationid-schedule
+      description: Get events in a date range
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult.get-api-station-stationid-schedule
+      with:
+        stationId: tools.stationId
+      inputParameters:
+      - name: stationId
+        type: string
+        description: stationId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-station-stationid-schedule-live
+      description: Current live broadcast status and metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult.get-api-station-stationid-schedule-live
+      with:
+        stationId: tools.stationId
+      inputParameters:
+      - name: stationId
+        type: string
+        description: stationId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-station-stationid-media-track
+      description: Retrieve all media tracks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult.get-api-station-stationid-media-track
+      with:
+        stationId: tools.stationId
+      inputParameters:
+      - name: stationId
+        type: string
+        description: stationId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-api-station-stationid-media-track
+      description: Upload an MP3 track
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: radio-cult.post-api-station-stationid-media-track
+      with:
+        stationId: tools.stationId
+      inputParameters:
+      - name: stationId
+        type: string
+        description: stationId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-station-stationid-media-track-trackid-do
+      description: Get a signed download URL for a track
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult.get-api-station-stationid-media-track-trackid-do
+      with:
+        stationId: tools.stationId
+        trackId: tools.trackId
+      inputParameters:
+      - name: stationId
+        type: string
+        description: stationId
+        required: true
+      - name: trackId
+        type: string
+        description: trackId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: put-api-station-stationid-media-track-trackid-ta
+      description: Tag a media track
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: radio-cult.put-api-station-stationid-media-track-trackid-ta
+      with:
+        stationId: tools.stationId
+        trackId: tools.trackId
+        tagId: tools.tagId
+      inputParameters:
+      - name: stationId
+        type: string
+        description: stationId
+        required: true
+      - name: trackId
+        type: string
+        description: trackId
+        required: true
+      - name: tagId
+        type: string
+        description: tagId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-api-station-stationid-media-track-trackid-u
+      description: Upload a track to Soundcloud
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: radio-cult.post-api-station-stationid-media-track-trackid-u
+      with:
+        stationId: tools.stationId
+        trackId: tools.trackId
+      inputParameters:
+      - name: stationId
+        type: string
+        description: stationId
+        required: true
+      - name: trackId
+        type: string
+        description: trackId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-station-stationid-media-playlist
+      description: Retrieve all playlists
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult.get-api-station-stationid-media-playlist
+      with:
+        stationId: tools.stationId
+      inputParameters:
+      - name: stationId
+        type: string
+        description: stationId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-api-station-stationid-media-playlist-playli
+      description: Add an entry to a playlist
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: radio-cult.post-api-station-stationid-media-playlist-playli
+      with:
+        stationId: tools.stationId
+        playlistId: tools.playlistId
+      inputParameters:
+      - name: stationId
+        type: string
+        description: stationId
+        required: true
+      - name: playlistId
+        type: string
+        description: playlistId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-api-station-stationid-media-playlist-play
+      description: Clear all entries from a playlist
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: radio-cult.delete-api-station-stationid-media-playlist-play
+      with:
+        stationId: tools.stationId
+        playlistId: tools.playlistId
+      inputParameters:
+      - name: stationId
+        type: string
+        description: stationId
+        required: true
+      - name: playlistId
+        type: string
+        description: playlistId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-station-stationid-media-tag
+      description: Retrieve all tags
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult.get-api-station-stationid-media-tag
+      with:
+        stationId: tools.stationId
+      inputParameters:
+      - name: stationId
+        type: string
+        description: stationId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-station-stationid-media-recording
+      description: Retrieve recordings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult.get-api-station-stationid-media-recording
+      with:
+        stationId: tools.stationId
+      inputParameters:
+      - name: stationId
+        type: string
+        description: stationId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-station-stationid-media-recording-record
+      description: Get a signed download URL for a recording
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult.get-api-station-stationid-media-recording-record
+      with:
+        stationId: tools.stationId
+        recordingId: tools.recordingId
+      inputParameters:
+      - name: stationId
+        type: string
+        description: stationId
+        required: true
+      - name: recordingId
+        type: string
+        description: recordingId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-station-stationid-streaming-history-late
+      description: Recent track playback history
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult.get-api-station-stationid-streaming-history-late
+      with:
+        stationId: tools.stationId
+      inputParameters:
+      - name: stationId
+        type: string
+        description: stationId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    RADIO_CULT_TOKEN: RADIO_CULT_TOKEN
