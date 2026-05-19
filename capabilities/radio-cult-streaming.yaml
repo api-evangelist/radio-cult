@@ -1,0 +1,81 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Radio Cult API — Streaming
+  description: 'Radio Cult API — Streaming. 1 operations. Lead operation: Recent track playback history. Self-contained Naftiko
+    capability covering one Radio Cult business surface.'
+  tags:
+  - Radio Cult
+  - Streaming
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RADIO_CULT_API_KEY: RADIO_CULT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: radio-cult-streaming
+    baseUri: https://api.radiocult.fm
+    description: Radio Cult API — Streaming business capability. Self-contained, no shared references.
+    resources:
+    - name: api-station-stationId-streaming-history-latest-results
+      path: /api/station/{stationId}/streaming/history/latest-results
+      operations:
+      - name: get
+        method: GET
+        description: Recent track playback history
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: x-api-key
+      value: '{{env.RADIO_CULT_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: radio-cult-streaming-rest
+    port: 8080
+    description: REST adapter for Radio Cult API — Streaming. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/station/{stationid}/streaming/history/latest-results
+      name: api-station-stationid-streaming-history-latest-results
+      description: REST surface for api-station-stationId-streaming-history-latest-results.
+      operations:
+      - method: GET
+        name: get
+        description: Recent track playback history
+        call: radio-cult-streaming.get
+        with:
+          stationId: rest.stationId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: radio-cult-streaming-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Radio Cult API — Streaming. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: recent-track-playback-history
+      description: Recent track playback history
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult-streaming.get
+      with:
+        stationId: tools.stationId
+      outputParameters:
+      - type: object
+        mapping: $.

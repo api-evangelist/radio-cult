@@ -1,0 +1,209 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Radio Cult API — Artists
+  description: 'Radio Cult API — Artists. 4 operations. Lead operation: Retrieve all artists. Self-contained Naftiko capability
+    covering one Radio Cult business surface.'
+  tags:
+  - Radio Cult
+  - Artists
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RADIO_CULT_API_KEY: RADIO_CULT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: radio-cult-artists
+    baseUri: https://api.radiocult.fm
+    description: Radio Cult API — Artists business capability. Self-contained, no shared references.
+    resources:
+    - name: api-station-stationId-artists
+      path: /api/station/{stationId}/artists
+      operations:
+      - name: get
+        method: GET
+        description: Retrieve all artists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+      - name: post
+        method: POST
+        description: Create an artist
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+    - name: api-station-stationId-artists-artistId
+      path: /api/station/{stationId}/artists/{artistId}
+      operations:
+      - name: get
+        method: GET
+        description: Fetch artist by ID or slug
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        - name: artistId
+          in: path
+          type: string
+          required: true
+    - name: api-station-stationId-artists-artistId-schedule
+      path: /api/station/{stationId}/artists/{artistId}/schedule
+      operations:
+      - name: get
+        method: GET
+        description: Get an artist's scheduled events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        - name: artistId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: x-api-key
+      value: '{{env.RADIO_CULT_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: radio-cult-artists-rest
+    port: 8080
+    description: REST adapter for Radio Cult API — Artists. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/station/{stationid}/artists
+      name: api-station-stationid-artists
+      description: REST surface for api-station-stationId-artists.
+      operations:
+      - method: GET
+        name: get
+        description: Retrieve all artists
+        call: radio-cult-artists.get
+        with:
+          stationId: rest.stationId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: Create an artist
+        call: radio-cult-artists.post
+        with:
+          stationId: rest.stationId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/station/{stationid}/artists/{artistid}
+      name: api-station-stationid-artists-artistid
+      description: REST surface for api-station-stationId-artists-artistId.
+      operations:
+      - method: GET
+        name: get
+        description: Fetch artist by ID or slug
+        call: radio-cult-artists.get
+        with:
+          stationId: rest.stationId
+          artistId: rest.artistId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/station/{stationid}/artists/{artistid}/schedule
+      name: api-station-stationid-artists-artistid-schedule
+      description: REST surface for api-station-stationId-artists-artistId-schedule.
+      operations:
+      - method: GET
+        name: get
+        description: Get an artist's scheduled events
+        call: radio-cult-artists.get
+        with:
+          stationId: rest.stationId
+          artistId: rest.artistId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: radio-cult-artists-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Radio Cult API — Artists. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: retrieve-all-artists
+      description: Retrieve all artists
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult-artists.get
+      with:
+        stationId: tools.stationId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-artist
+      description: Create an artist
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: radio-cult-artists.post
+      with:
+        stationId: tools.stationId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fetch-artist-id-slug
+      description: Fetch artist by ID or slug
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult-artists.get
+      with:
+        stationId: tools.stationId
+        artistId: tools.artistId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-artist-s-scheduled-events
+      description: Get an artist's scheduled events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult-artists.get
+      with:
+        stationId: tools.stationId
+        artistId: tools.artistId
+      outputParameters:
+      - type: object
+        mapping: $.

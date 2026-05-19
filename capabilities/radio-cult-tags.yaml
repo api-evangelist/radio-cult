@@ -1,0 +1,81 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Radio Cult API — Tags
+  description: 'Radio Cult API — Tags. 1 operations. Lead operation: Retrieve all tags. Self-contained Naftiko capability
+    covering one Radio Cult business surface.'
+  tags:
+  - Radio Cult
+  - Tags
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RADIO_CULT_API_KEY: RADIO_CULT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: radio-cult-tags
+    baseUri: https://api.radiocult.fm
+    description: Radio Cult API — Tags business capability. Self-contained, no shared references.
+    resources:
+    - name: api-station-stationId-media-tag
+      path: /api/station/{stationId}/media/tag
+      operations:
+      - name: get
+        method: GET
+        description: Retrieve all tags
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: x-api-key
+      value: '{{env.RADIO_CULT_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: radio-cult-tags-rest
+    port: 8080
+    description: REST adapter for Radio Cult API — Tags. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/station/{stationid}/media/tag
+      name: api-station-stationid-media-tag
+      description: REST surface for api-station-stationId-media-tag.
+      operations:
+      - method: GET
+        name: get
+        description: Retrieve all tags
+        call: radio-cult-tags.get
+        with:
+          stationId: rest.stationId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: radio-cult-tags-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Radio Cult API — Tags. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: retrieve-all-tags
+      description: Retrieve all tags
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult-tags.get
+      with:
+        stationId: tools.stationId
+      outputParameters:
+      - type: object
+        mapping: $.

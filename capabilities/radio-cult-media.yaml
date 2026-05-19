@@ -1,0 +1,262 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Radio Cult API — Media
+  description: 'Radio Cult API — Media. 5 operations. Lead operation: Retrieve all media tracks. Self-contained Naftiko capability
+    covering one Radio Cult business surface.'
+  tags:
+  - Radio Cult
+  - Media
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RADIO_CULT_API_KEY: RADIO_CULT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: radio-cult-media
+    baseUri: https://api.radiocult.fm
+    description: Radio Cult API — Media business capability. Self-contained, no shared references.
+    resources:
+    - name: api-station-stationId-media-track
+      path: /api/station/{stationId}/media/track
+      operations:
+      - name: get
+        method: GET
+        description: Retrieve all media tracks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+      - name: post
+        method: POST
+        description: Upload an MP3 track
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+    - name: api-station-stationId-media-track-trackId-download-url
+      path: /api/station/{stationId}/media/track/{trackId}/download-url
+      operations:
+      - name: get
+        method: GET
+        description: Get a signed download URL for a track
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        - name: trackId
+          in: path
+          type: string
+          required: true
+    - name: api-station-stationId-media-track-trackId-tag-tagId
+      path: /api/station/{stationId}/media/track/{trackId}/tag/{tagId}
+      operations:
+      - name: put
+        method: PUT
+        description: Tag a media track
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        - name: trackId
+          in: path
+          type: string
+          required: true
+        - name: tagId
+          in: path
+          type: string
+          required: true
+    - name: api-station-stationId-media-track-trackId-upload-soundcloud
+      path: /api/station/{stationId}/media/track/{trackId}/upload/soundcloud
+      operations:
+      - name: post
+        method: POST
+        description: Upload a track to Soundcloud
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+        - name: trackId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: x-api-key
+      value: '{{env.RADIO_CULT_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: radio-cult-media-rest
+    port: 8080
+    description: REST adapter for Radio Cult API — Media. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/station/{stationid}/media/track
+      name: api-station-stationid-media-track
+      description: REST surface for api-station-stationId-media-track.
+      operations:
+      - method: GET
+        name: get
+        description: Retrieve all media tracks
+        call: radio-cult-media.get
+        with:
+          stationId: rest.stationId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: Upload an MP3 track
+        call: radio-cult-media.post
+        with:
+          stationId: rest.stationId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/station/{stationid}/media/track/{trackid}/download-url
+      name: api-station-stationid-media-track-trackid-download-url
+      description: REST surface for api-station-stationId-media-track-trackId-download-url.
+      operations:
+      - method: GET
+        name: get
+        description: Get a signed download URL for a track
+        call: radio-cult-media.get
+        with:
+          stationId: rest.stationId
+          trackId: rest.trackId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/station/{stationid}/media/track/{trackid}/tag/{tagid}
+      name: api-station-stationid-media-track-trackid-tag-tagid
+      description: REST surface for api-station-stationId-media-track-trackId-tag-tagId.
+      operations:
+      - method: PUT
+        name: put
+        description: Tag a media track
+        call: radio-cult-media.put
+        with:
+          stationId: rest.stationId
+          trackId: rest.trackId
+          tagId: rest.tagId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/station/{stationid}/media/track/{trackid}/upload/soundcloud
+      name: api-station-stationid-media-track-trackid-upload-soundcloud
+      description: REST surface for api-station-stationId-media-track-trackId-upload-soundcloud.
+      operations:
+      - method: POST
+        name: post
+        description: Upload a track to Soundcloud
+        call: radio-cult-media.post
+        with:
+          stationId: rest.stationId
+          trackId: rest.trackId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: radio-cult-media-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Radio Cult API — Media. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: retrieve-all-media-tracks
+      description: Retrieve all media tracks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult-media.get
+      with:
+        stationId: tools.stationId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upload-mp3-track
+      description: Upload an MP3 track
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: radio-cult-media.post
+      with:
+        stationId: tools.stationId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-signed-download-url-track
+      description: Get a signed download URL for a track
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult-media.get
+      with:
+        stationId: tools.stationId
+        trackId: tools.trackId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: tag-media-track
+      description: Tag a media track
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: radio-cult-media.put
+      with:
+        stationId: tools.stationId
+        trackId: tools.trackId
+        tagId: tools.tagId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upload-track-soundcloud
+      description: Upload a track to Soundcloud
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: radio-cult-media.post
+      with:
+        stationId: tools.stationId
+        trackId: tools.trackId
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Radio Cult API — Schedule
+  description: 'Radio Cult API — Schedule. 2 operations. Lead operation: Get events in a date range. Self-contained Naftiko
+    capability covering one Radio Cult business surface.'
+  tags:
+  - Radio Cult
+  - Schedule
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RADIO_CULT_API_KEY: RADIO_CULT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: radio-cult-schedule
+    baseUri: https://api.radiocult.fm
+    description: Radio Cult API — Schedule business capability. Self-contained, no shared references.
+    resources:
+    - name: api-station-stationId-schedule
+      path: /api/station/{stationId}/schedule
+      operations:
+      - name: get
+        method: GET
+        description: Get events in a date range
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+    - name: api-station-stationId-schedule-live
+      path: /api/station/{stationId}/schedule/live
+      operations:
+      - name: get
+        method: GET
+        description: Current live broadcast status and metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: stationId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: x-api-key
+      value: '{{env.RADIO_CULT_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: radio-cult-schedule-rest
+    port: 8080
+    description: REST adapter for Radio Cult API — Schedule. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/station/{stationid}/schedule
+      name: api-station-stationid-schedule
+      description: REST surface for api-station-stationId-schedule.
+      operations:
+      - method: GET
+        name: get
+        description: Get events in a date range
+        call: radio-cult-schedule.get
+        with:
+          stationId: rest.stationId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/station/{stationid}/schedule/live
+      name: api-station-stationid-schedule-live
+      description: REST surface for api-station-stationId-schedule-live.
+      operations:
+      - method: GET
+        name: get
+        description: Current live broadcast status and metadata
+        call: radio-cult-schedule.get
+        with:
+          stationId: rest.stationId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: radio-cult-schedule-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Radio Cult API — Schedule. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-events-date-range
+      description: Get events in a date range
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult-schedule.get
+      with:
+        stationId: tools.stationId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: current-live-broadcast-status-and
+      description: Current live broadcast status and metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: radio-cult-schedule.get
+      with:
+        stationId: tools.stationId
+      outputParameters:
+      - type: object
+        mapping: $.
