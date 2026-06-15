@@ -1,0 +1,443 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Radio Cult API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Artists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all artists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.radiocult.fm/api/station/:stationId/artists",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve all artists"
+        },
+        {
+          "info": {
+            "name": "Create an artist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.radiocult.fm/api/station/:stationId/artists",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create an artist"
+        },
+        {
+          "info": {
+            "name": "Fetch artist by ID or slug",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.radiocult.fm/api/station/:stationId/artists/:artistId",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "artistId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetch artist by ID or slug"
+        },
+        {
+          "info": {
+            "name": "Get an artist's scheduled events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.radiocult.fm/api/station/:stationId/artists/:artistId/schedule",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "artistId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an artist's scheduled events"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Schedule",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get events in a date range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.radiocult.fm/api/station/:stationId/schedule",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get events in a date range"
+        },
+        {
+          "info": {
+            "name": "Current live broadcast status and metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.radiocult.fm/api/station/:stationId/schedule/live",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Current live broadcast status and metadata"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Media",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all media tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.radiocult.fm/api/station/:stationId/media/track",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve all media tracks"
+        },
+        {
+          "info": {
+            "name": "Upload an MP3 track",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.radiocult.fm/api/station/:stationId/media/track",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Upload an MP3 track"
+        },
+        {
+          "info": {
+            "name": "Get a signed download URL for a track",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.radiocult.fm/api/station/:stationId/media/track/:trackId/download-url",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trackId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a signed download URL for a track"
+        },
+        {
+          "info": {
+            "name": "Tag a media track",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.radiocult.fm/api/station/:stationId/media/track/:trackId/tag/:tagId",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trackId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Tag a media track"
+        },
+        {
+          "info": {
+            "name": "Upload a track to Soundcloud",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.radiocult.fm/api/station/:stationId/media/track/:trackId/upload/soundcloud",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trackId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Upload a track to Soundcloud"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Playlists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all playlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.radiocult.fm/api/station/:stationId/media/playlist",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve all playlists"
+        },
+        {
+          "info": {
+            "name": "Add an entry to a playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.radiocult.fm/api/station/:stationId/media/playlist/:playlistId/entry",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playlistId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Add an entry to a playlist"
+        },
+        {
+          "info": {
+            "name": "Clear all entries from a playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.radiocult.fm/api/station/:stationId/media/playlist/:playlistId/entries",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playlistId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Clear all entries from a playlist"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.radiocult.fm/api/station/:stationId/media/tag",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve all tags"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Recordings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve recordings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.radiocult.fm/api/station/:stationId/media/recording",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve recordings"
+        },
+        {
+          "info": {
+            "name": "Get a signed download URL for a recording",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.radiocult.fm/api/station/:stationId/media/recording/:recordingId/download-url",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "recordingId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a signed download URL for a recording"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Streaming",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Recent track playback history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.radiocult.fm/api/station/:stationId/streaming/history/latest-results",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Recent track playback history"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
