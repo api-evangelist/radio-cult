@@ -16,8 +16,14 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/radio-cult/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 common:
+  - type: DomainSecurity
+    url: security/radio-cult-domain-security.yml
+  - type: Authentication
+    url: authentication/radio-cult-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/radio-cult
+  - url: https://www.radiocult.fm/blog
+    type: Blog
 apis:
   - aid: radio-cult:radio-cult
     name: Radio Cult
