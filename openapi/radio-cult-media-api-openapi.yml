@@ -1,0 +1,111 @@
+openapi: 3.0.3
+info:
+  title: Radio Cult Artists Media API
+  description: Power your online radio station website with the Radio Cult API. Manage artists, schedules, media, playlists, recordings, and live streaming metadata.
+  version: '1.0'
+  contact:
+    name: Radio Cult
+    url: https://www.radiocult.fm/docs/api
+servers:
+- url: https://api.radiocult.fm
+  description: Radio Cult production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Media
+paths:
+  /api/station/{stationId}/media/track:
+    get:
+      tags:
+      - Media
+      summary: Retrieve all media tracks
+      parameters:
+      - name: stationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Media tracks
+    post:
+      tags:
+      - Media
+      summary: Upload an MP3 track
+      parameters:
+      - name: stationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Uploaded track
+  /api/station/{stationId}/media/track/{trackId}/download-url:
+    get:
+      tags:
+      - Media
+      summary: Get a signed download URL for a track
+      parameters:
+      - name: stationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: trackId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Signed download URL
+  /api/station/{stationId}/media/track/{trackId}/tag/{tagId}:
+    put:
+      tags:
+      - Media
+      summary: Tag a media track
+      parameters:
+      - name: stationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: trackId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: tagId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Tagged
+  /api/station/{stationId}/media/track/{trackId}/upload/soundcloud:
+    post:
+      tags:
+      - Media
+      summary: Upload a track to Soundcloud
+      parameters:
+      - name: stationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: trackId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Soundcloud upload result
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key

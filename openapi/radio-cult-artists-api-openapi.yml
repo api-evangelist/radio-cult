@@ -1,0 +1,87 @@
+openapi: 3.0.3
+info:
+  title: Radio Cult Artists API
+  description: Power your online radio station website with the Radio Cult API. Manage artists, schedules, media, playlists, recordings, and live streaming metadata.
+  version: '1.0'
+  contact:
+    name: Radio Cult
+    url: https://www.radiocult.fm/docs/api
+servers:
+- url: https://api.radiocult.fm
+  description: Radio Cult production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Artists
+paths:
+  /api/station/{stationId}/artists:
+    get:
+      tags:
+      - Artists
+      summary: Retrieve all artists
+      parameters:
+      - name: stationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of artists
+    post:
+      tags:
+      - Artists
+      summary: Create an artist
+      parameters:
+      - name: stationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Created artist
+  /api/station/{stationId}/artists/{artistId}:
+    get:
+      tags:
+      - Artists
+      summary: Fetch artist by ID or slug
+      parameters:
+      - name: stationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: artistId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Artist record
+  /api/station/{stationId}/artists/{artistId}/schedule:
+    get:
+      tags:
+      - Artists
+      summary: Get an artist's scheduled events
+      parameters:
+      - name: stationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: artistId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Scheduled events
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key

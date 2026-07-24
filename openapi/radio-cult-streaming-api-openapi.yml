@@ -1,0 +1,36 @@
+openapi: 3.0.3
+info:
+  title: Radio Cult Artists Streaming API
+  description: Power your online radio station website with the Radio Cult API. Manage artists, schedules, media, playlists, recordings, and live streaming metadata.
+  version: '1.0'
+  contact:
+    name: Radio Cult
+    url: https://www.radiocult.fm/docs/api
+servers:
+- url: https://api.radiocult.fm
+  description: Radio Cult production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Streaming
+paths:
+  /api/station/{stationId}/streaming/history/latest-results:
+    get:
+      tags:
+      - Streaming
+      summary: Recent track playback history
+      parameters:
+      - name: stationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Recent tracks
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
