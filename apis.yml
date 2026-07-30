@@ -2,9 +2,22 @@ aid: radio-cult
 name: Radio Cult
 description: Are you looking to power your online radio stations website with the Radio Cult API? If so, you're in the right place.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/radio-cult.png
 tags:
   - Radio
   - Streaming
@@ -27,23 +40,90 @@ common:
   - url: https://www.radiocult.fm/blog
     type: Blog
 apis:
-  - aid: radio-cult:radio-cult
-    name: Radio Cult
-    description: >-
-      Are you looking to power your online radio stations website with the Radio Cult API? If so, you're in the right
-      place.
-    humanURL: https://www.radiocult.fm/docs/api
-    baseURL: https://api.radiocult.fm
-    tags:
-      - Radio
-      - Streaming
-      - Audio
-      - Broadcasting
-    properties:
-      - type: Documentation
-        url: https://www.radiocult.fm/docs/api
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/radio-cult/refs/heads/main/openapi/radio-cult-openapi.yml
+- aid: radio-cult:radio-cult-artists-api
+  name: Radio Cult Artists API
+  description: The Artists API from Radio Cult — 3 operation(s) for artists.
+  humanURL: https://www.radiocult.fm/docs/api
+  baseURL: https://api.radiocult.fm
+  tags:
+  - Artists
+  properties:
+  - type: OpenAPI
+    url: openapi/radio-cult-artists-api-openapi.yml
+  - type: Documentation
+    url: https://www.radiocult.fm/docs/api
+- aid: radio-cult:radio-cult-media-api
+  name: Radio Cult Media API
+  description: The Media API from Radio Cult — 4 operation(s) for media.
+  humanURL: https://www.radiocult.fm/docs/api
+  baseURL: https://api.radiocult.fm
+  tags:
+  - Media
+  properties:
+  - type: OpenAPI
+    url: openapi/radio-cult-media-api-openapi.yml
+  - type: Documentation
+    url: https://www.radiocult.fm/docs/api
+- aid: radio-cult:radio-cult-playlists-api
+  name: Radio Cult Playlists API
+  description: The Playlists API from Radio Cult — 3 operation(s) for playlists.
+  humanURL: https://www.radiocult.fm/docs/api
+  baseURL: https://api.radiocult.fm
+  tags:
+  - Playlists
+  properties:
+  - type: OpenAPI
+    url: openapi/radio-cult-playlists-api-openapi.yml
+  - type: Documentation
+    url: https://www.radiocult.fm/docs/api
+- aid: radio-cult:radio-cult-recordings-api
+  name: Radio Cult Recordings API
+  description: The Recordings API from Radio Cult — 2 operation(s) for recordings.
+  humanURL: https://www.radiocult.fm/docs/api
+  baseURL: https://api.radiocult.fm
+  tags:
+  - Recordings
+  properties:
+  - type: OpenAPI
+    url: openapi/radio-cult-recordings-api-openapi.yml
+  - type: Documentation
+    url: https://www.radiocult.fm/docs/api
+- aid: radio-cult:radio-cult-schedule-api
+  name: Radio Cult Schedule API
+  description: The Schedule API from Radio Cult — 2 operation(s) for schedule.
+  humanURL: https://www.radiocult.fm/docs/api
+  baseURL: https://api.radiocult.fm
+  tags:
+  - Schedule
+  properties:
+  - type: OpenAPI
+    url: openapi/radio-cult-schedule-api-openapi.yml
+  - type: Documentation
+    url: https://www.radiocult.fm/docs/api
+- aid: radio-cult:radio-cult-streaming-api
+  name: Radio Cult Streaming API
+  description: The Streaming API from Radio Cult — 1 operation(s) for streaming.
+  humanURL: https://www.radiocult.fm/docs/api
+  baseURL: https://api.radiocult.fm
+  tags:
+  - Streaming
+  properties:
+  - type: OpenAPI
+    url: openapi/radio-cult-streaming-api-openapi.yml
+  - type: Documentation
+    url: https://www.radiocult.fm/docs/api
+- aid: radio-cult:radio-cult-tags-api
+  name: Radio Cult Tags API
+  description: The Tags API from Radio Cult — 1 operation(s) for tags.
+  humanURL: https://www.radiocult.fm/docs/api
+  baseURL: https://api.radiocult.fm
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/radio-cult-tags-api-openapi.yml
+  - type: Documentation
+    url: https://www.radiocult.fm/docs/api
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
