@@ -1,0 +1,26 @@
+{
+  "provider": "radio-cult",
+  "sources": [
+    "radio-cult-artists-api-openapi.yml",
+    "radio-cult-media-api-openapi.yml",
+    "radio-cult-playlists-api-openapi.yml",
+    "radio-cult-recordings-api-openapi.yml",
+    "radio-cult-schedule-api-openapi.yml",
+    "radio-cult-streaming-api-openapi.yml",
+    "radio-cult-tags-api-openapi.yml"
+  ],
+  "outputs": [
+    "radio-cult-artists-api-openapi.yml",
+    "radio-cult-media-api-openapi.yml",
+    "radio-cult-playlists-api-openapi.yml",
+    "radio-cult-recordings-api-openapi.yml",
+    "radio-cult-schedule-api-openapi.yml",
+    "radio-cult-streaming-api-openapi.yml",
+    "radio-cult-tags-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
