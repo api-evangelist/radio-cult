@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Radio Cult Artists Playlists API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Playlists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all playlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.radiocult.fm/api/station/:stationId/media/playlist",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve all playlists"
+        },
+        {
+          "info": {
+            "name": "Add an entry to a playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.radiocult.fm/api/station/:stationId/media/playlist/:playlistId/entry",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playlistId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Add an entry to a playlist"
+        },
+        {
+          "info": {
+            "name": "Clear all entries from a playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.radiocult.fm/api/station/:stationId/media/playlist/:playlistId/entries",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "playlistId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Clear all entries from a playlist"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

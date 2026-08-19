@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Radio Cult Artists Media API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Media",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all media tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.radiocult.fm/api/station/:stationId/media/track",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve all media tracks"
+        },
+        {
+          "info": {
+            "name": "Upload an MP3 track",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.radiocult.fm/api/station/:stationId/media/track",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Upload an MP3 track"
+        },
+        {
+          "info": {
+            "name": "Get a signed download URL for a track",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.radiocult.fm/api/station/:stationId/media/track/:trackId/download-url",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trackId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a signed download URL for a track"
+        },
+        {
+          "info": {
+            "name": "Tag a media track",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.radiocult.fm/api/station/:stationId/media/track/:trackId/tag/:tagId",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trackId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Tag a media track"
+        },
+        {
+          "info": {
+            "name": "Upload a track to Soundcloud",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.radiocult.fm/api/station/:stationId/media/track/:trackId/upload/soundcloud",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trackId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Upload a track to Soundcloud"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

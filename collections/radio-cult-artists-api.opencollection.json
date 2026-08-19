@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Radio Cult Artists API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Artists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all artists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.radiocult.fm/api/station/:stationId/artists",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve all artists"
+        },
+        {
+          "info": {
+            "name": "Create an artist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.radiocult.fm/api/station/:stationId/artists",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create an artist"
+        },
+        {
+          "info": {
+            "name": "Fetch artist by ID or slug",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.radiocult.fm/api/station/:stationId/artists/:artistId",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "artistId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetch artist by ID or slug"
+        },
+        {
+          "info": {
+            "name": "Get an artist's scheduled events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.radiocult.fm/api/station/:stationId/artists/:artistId/schedule",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "artistId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an artist's scheduled events"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

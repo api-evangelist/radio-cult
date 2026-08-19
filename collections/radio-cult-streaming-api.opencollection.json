@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Radio Cult Artists Streaming API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Streaming",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Recent track playback history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.radiocult.fm/api/station/:stationId/streaming/history/latest-results",
+            "params": [
+              {
+                "name": "stationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Recent track playback history"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
