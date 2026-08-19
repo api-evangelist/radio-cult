@@ -27,7 +27,7 @@ tags:
 created: '2025-02-12'
 modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/radio-cult/refs/heads/main/apis.yml
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 common:
   - type: AgenticAccess
     url: agentic-access/radio-cult-agentic-access.yml
