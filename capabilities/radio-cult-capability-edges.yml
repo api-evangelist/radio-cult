@@ -1,0 +1,48 @@
+slug: radio-cult
+provider: Radio Cult
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Media, Entertainment & Telecom Content
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Media
+  spec_file: radio-cult-media-api-openapi.yml
+  capability_id: BC-3710
+  capability_id_l1: BC-3710
+  capability_name: Media Asset Management
+  confidence: 0.8
+  evidence: POST /api/station/{stationId}/media/track "Upload an MP3 track"; "Get a signed download URL
+    for a track"; "Tag a media track"
+  reason: Operations onboard audio files into the platform, tag them, and produce access URLs and onward
+    delivery to Soundcloud — this is ingest, cataloguing and storage of media assets. L1 Media Asset Management
+    is well grounded; the surface spans ingest, metadata and delivery so no single L2 is named cleanly.
+- tag: Playlists
+  spec_file: radio-cult-playlists-api-openapi.yml
+  capability_id: BC-3730.40
+  capability_id_l1: BC-3730
+  capability_name: Playlist & Continuity Management
+  confidence: 0.72
+  evidence: GET /api/station/{stationId}/media/playlist "Retrieve all playlists"; "Add an entry to a playlist";
+    "Clear all entries from a playlist"
+  reason: Building and editing ordered playlists of tracks for an online radio station corresponds to
+    transmission playlist/continuity build for a 24/7 streaming channel. Moderate confidence because a
+    playlist could alternatively be a purely on-demand catalogue construct.
+- tag: Schedule
+  spec_file: radio-cult-schedule-api-openapi.yml
+  capability_id: BC-3730.10
+  capability_id_l1: BC-3730
+  capability_name: Linear Channel Scheduling
+  confidence: 0.72
+  evidence: GET /api/station/{stationId}/schedule "Get events in a date range"; GET /api/station/{stationId}/schedule/live
+    "Current live broadcast status and metadata"
+  reason: Station schedule of broadcast events plus current on-air status is linear channel scheduling
+    / programme guide data for a radio stream. Reads only, and could equally serve EPG publication, hence
+    0.72.
