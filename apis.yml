@@ -2,6 +2,17 @@ aid: radio-cult
 name: Radio Cult
 description: Are you looking to power your online radio stations website with the Radio Cult API? If so, you're in the right place.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
