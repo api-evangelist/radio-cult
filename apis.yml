@@ -1,6 +1,7 @@
 aid: radio-cult
 name: Radio Cult
-description: Are you looking to power your online radio stations website with the Radio Cult API? If so, you're in the right place.
+description: Are you looking to power your online radio stations website with the Radio Cult API? If so,
+  you're in the right place.
 type: Index
 deliveryModel:
   model: unknown
@@ -31,29 +32,31 @@ position: Consuming
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/radio-cult.png
 tags:
-  - Radio
-  - Streaming
-  - Audio
-  - Music
-  - Broadcasting
+- Radio
+- Streaming
+- Audio
+- Music
+- Broadcasting
 created: '2025-02-12'
-modified: '2026-05-19'
+modified: '2026-09-16'
 url: https://raw.githubusercontent.com/api-evangelist/radio-cult/refs/heads/main/apis.yml
 specificationVersion: '0.23'
 common:
-  - type: CapabilityMap
-    url: capabilities/radio-cult-capability-edges.yml
-    name: Radio Cult Business Capability Map
-  - type: AgenticAccess
-    url: agentic-access/radio-cult-agentic-access.yml
-  - type: DomainSecurity
-    url: security/radio-cult-domain-security.yml
-  - type: Authentication
-    url: authentication/radio-cult-authentication.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/radio-cult
-  - url: https://www.radiocult.fm/blog
-    type: Blog
+- type: Website
+  url: https://radiocult.fm
+- type: CapabilityMap
+  url: capabilities/radio-cult-capability-edges.yml
+  name: Radio Cult Business Capability Map
+- type: AgenticAccess
+  url: agentic-access/radio-cult-agentic-access.yml
+- type: DomainSecurity
+  url: security/radio-cult-domain-security.yml
+- type: Authentication
+  url: authentication/radio-cult-authentication.yml
+- type: LinkedIn
+  url: https://www.linkedin.com/company/radio-cult
+- url: https://www.radiocult.fm/blog
+  type: Blog
 apis:
 - aid: radio-cult:radio-cult-artists-api
   name: Radio Cult Artists API
@@ -140,5 +143,5 @@ apis:
   - type: Documentation
     url: https://www.radiocult.fm/docs/api
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
