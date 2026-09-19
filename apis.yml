@@ -100,6 +100,8 @@ apis:
   humanURL: https://www.radiocult.fm/docs/api
   baseURL: https://api.radiocult.fm
   tags:
+  - Recording
+  tags_raw:
   - Recordings
   properties:
   - type: OpenAPI
