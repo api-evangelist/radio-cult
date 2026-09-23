@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Radio Cult Artists Media API
+  title: Radio Cult Media API
   description: Power your online radio station website with the Radio Cult API. Manage artists, schedules, media, playlists, recordings, and live streaming metadata.
   version: '1.0'
   contact:
@@ -28,6 +28,8 @@ paths:
       responses:
         '200':
           description: Media tracks
+      operationId: getApiStationByStationIdMediaTrack
+      x-operation-id-source: derived
     post:
       tags:
       - Media
@@ -41,6 +43,8 @@ paths:
       responses:
         '200':
           description: Uploaded track
+      operationId: postApiStationByStationIdMediaTrack
+      x-operation-id-source: derived
   /api/station/{stationId}/media/track/{trackId}/download-url:
     get:
       tags:
@@ -60,6 +64,8 @@ paths:
       responses:
         '200':
           description: Signed download URL
+      operationId: getApiStationByStationIdMediaTrackByTrackIdDownloadUrl
+      x-operation-id-source: derived
   /api/station/{stationId}/media/track/{trackId}/tag/{tagId}:
     put:
       tags:
@@ -84,6 +90,8 @@ paths:
       responses:
         '200':
           description: Tagged
+      operationId: putApiStationByStationIdMediaTrackByTrackIdTagByTagId
+      x-operation-id-source: derived
   /api/station/{stationId}/media/track/{trackId}/upload/soundcloud:
     post:
       tags:
@@ -103,6 +111,8 @@ paths:
       responses:
         '200':
           description: Soundcloud upload result
+      operationId: postApiStationByStationIdMediaTrackByTrackIdUploadSoundcloud
+      x-operation-id-source: derived
 components:
   securitySchemes:
     ApiKeyAuth:

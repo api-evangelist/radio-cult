@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Radio Cult Artists API
   description: Power your online radio station website with the Radio Cult API. Manage artists, schedules, media, playlists, recordings, and live streaming metadata.
@@ -28,6 +28,8 @@ paths:
       responses:
         '200':
           description: List of artists
+      operationId: getApiStationByStationIdArtists
+      x-operation-id-source: derived
     post:
       tags:
       - Artists
@@ -41,6 +43,8 @@ paths:
       responses:
         '200':
           description: Created artist
+      operationId: postApiStationByStationIdArtists
+      x-operation-id-source: derived
   /api/station/{stationId}/artists/{artistId}:
     get:
       tags:
@@ -60,6 +64,8 @@ paths:
       responses:
         '200':
           description: Artist record
+      operationId: getApiStationByStationIdArtistsByArtistId
+      x-operation-id-source: derived
   /api/station/{stationId}/artists/{artistId}/schedule:
     get:
       tags:
@@ -79,6 +85,8 @@ paths:
       responses:
         '200':
           description: Scheduled events
+      operationId: getApiStationByStationIdArtistsByArtistIdSchedule
+      x-operation-id-source: derived
 components:
   securitySchemes:
     ApiKeyAuth:

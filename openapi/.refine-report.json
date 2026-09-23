@@ -1,13 +1,7 @@
 {
   "provider": "radio-cult",
   "sources": [
-    "radio-cult-artists-api-openapi.yml",
-    "radio-cult-media-api-openapi.yml",
-    "radio-cult-playlists-api-openapi.yml",
-    "radio-cult-recordings-api-openapi.yml",
-    "radio-cult-schedule-api-openapi.yml",
-    "radio-cult-streaming-api-openapi.yml",
-    "radio-cult-tags-api-openapi.yml"
+    "_original/radio-cult-openapi.yml"
   ],
   "outputs": [
     "radio-cult-artists-api-openapi.yml",
@@ -21,6 +15,18 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "radio-cult-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "radio-cult-artists-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "radio-cult-media-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "radio-cult-playlists-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "radio-cult-recordings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "radio-cult-schedule-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "radio-cult-streaming-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "radio-cult-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

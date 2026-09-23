@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Radio Cult Artists Schedule API
+  title: Radio Cult Schedule API
   description: Power your online radio station website with the Radio Cult API. Manage artists, schedules, media, playlists, recordings, and live streaming metadata.
   version: '1.0'
   contact:
@@ -28,6 +28,8 @@ paths:
       responses:
         '200':
           description: Scheduled events
+      operationId: getApiStationByStationIdSchedule
+      x-operation-id-source: derived
   /api/station/{stationId}/schedule/live:
     get:
       tags:
@@ -42,6 +44,8 @@ paths:
       responses:
         '200':
           description: Live broadcast status
+      operationId: getApiStationByStationIdScheduleLive
+      x-operation-id-source: derived
 components:
   securitySchemes:
     ApiKeyAuth:
