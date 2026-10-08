@@ -42,6 +42,12 @@ modified: '2026-09-16'
 url: https://raw.githubusercontent.com/api-evangelist/radio-cult/refs/heads/main/apis.yml
 specificationVersion: '0.23'
 common:
+- type: Plans
+  url: plans/radio-cult-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/radio-cult-rate-limits.yml
+- type: FinOps
+  url: finops/radio-cult-finops.yml
 - type: Website
   url: https://radiocult.fm
 - type: CapabilityMap
